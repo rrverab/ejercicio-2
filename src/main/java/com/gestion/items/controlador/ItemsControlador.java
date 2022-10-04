@@ -1,8 +1,10 @@
 package com.gestion.items.controlador;
 
 
+import com.gestion.items.dto.ItemStatus;
 import com.gestion.items.entidades.Items;
 import com.gestion.items.servicio.ItemsServicio;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -18,6 +20,9 @@ public class ItemsControlador {
 
     @Autowired
     private ItemsServicio service;
+
+    @Autowired
+    private RabbitTemplate template;
 
     @GetMapping(value = "/lists", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Items> GetList(){
@@ -44,8 +49,13 @@ public class ItemsControlador {
 
     @PostMapping(value = "/new", consumes = MediaType.APPLICATION_JSON_VALUE , produces = MediaType.APPLICATION_JSON_VALUE)
     public Items newProducto(@RequestBody Items item){
+        //item.setId(3);
+        //waiting
+        //created
+        ItemStatus itemStatus = new ItemStatus(item, "WAITING", "item created succesfully ");
+     //   template.convertAndSend(MessagingConfig.EXCHANGE, MessagingConfig.ROUTING_KEY, itemStatus);
 
-       return service.saveItem(item);
+        return service.saveItem(item);
 
     }
 
