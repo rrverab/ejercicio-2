@@ -1,25 +1,25 @@
 package com.gestion.items.dto;
 
-import com.gestion.items.entidades.Items;
+import com.gestion.items.entidades.Item;
 
 public class ItemStatus {
 
 
-    private Items item;
+    private Item item;
     private String status;//progress,completed
     private String message;
 
-    public ItemStatus(Items item, String status, String message) {
+    public ItemStatus(Item item, String status, String message) {
         this.item = item;
         this.status = status;
         this.message = message;
     }
 
-    public Items getItem() {
+    public Item getItem() {
         return item;
     }
 
-    public void setItem(Items item) {
+    public void setItem(Item item) {
         this.item = item;
     }
 

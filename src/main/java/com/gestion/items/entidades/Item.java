@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "items")
-public class Items {
+public class Item {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,7 +23,7 @@ public class Items {
     private Boolean nevera;
 
 
-    public Items(long id, String nombre, String tipo, String envase, Integer capacidad,Boolean nevera) {
+    public Item(long id, String nombre, String tipo, String envase, Integer capacidad, Boolean nevera) {
         this.id = id;
         this.nombre = nombre;
         this.tipo = tipo;
@@ -32,7 +32,7 @@ public class Items {
         this.nevera = nevera;
     }
 
-    public Items() {
+    public Item() {
     }
 
     public long getId() {

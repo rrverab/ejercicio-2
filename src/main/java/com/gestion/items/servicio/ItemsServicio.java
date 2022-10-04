@@ -1,7 +1,7 @@
 package com.gestion.items.servicio;
 
 
-import com.gestion.items.entidades.Items;
+import com.gestion.items.entidades.Item;
 import com.gestion.items.repositorio.ItemsRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,19 +14,19 @@ public class ItemsServicio {
     @Autowired
     ItemsRepositorio itemsRepositorio;
 
-    public List<Items> ListAll(){
+    public List<Item> ListAll(){
 
         return itemsRepositorio.findAll();
     }
 
-    public Items FinbyId(Long id){
+    public Item FinbyId(Long id){
         return itemsRepositorio.findById(id).get();
 
     }
 
-    public Items updateItems(Items item,Long id){
+    public Item updateItems(Item item, Long id){
 
-        Items item1 =  itemsRepositorio.findById(id).get();
+        Item item1 =  itemsRepositorio.findById(id).get();
 
        if (item1 != null){
            return itemsRepositorio.save(item1);
@@ -37,7 +37,7 @@ public class ItemsServicio {
 
     }
 
-    public Items saveItem(Items item){
+    public Item saveItem(Item item){
 
         return itemsRepositorio.save(item);
 
