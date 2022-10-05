@@ -1,32 +1,38 @@
 package com.gestion.items.controlador;
 
 
+import com.gestion.items.dto.ItemDto;
 import com.gestion.items.dto.ItemStatus;
 import com.gestion.items.entidades.Item;
 import com.gestion.items.servicio.ItemsServicio;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
-@RestController
-@RequestMapping(value = "/productos",produces = "application/json")
+@Controller
+//@RequestMapping(value = "/productos",produces = "application/json")
 public class ItemsControlador {
 
     @Autowired
     private ItemsServicio service;
 
-    @Autowired
-    private RabbitTemplate template;
+ //   @Autowired
+ //   private RabbitTemplate template;
 
-    @GetMapping( produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Item> GetList(){
-        return   service.ListAll();
+    @GetMapping( "/items")
+    public String ShowListItems(Model model){
+
+        List<Item> listItems = service.ListAll();
+        model.addAttribute("listItems",listItems);
+        return "items";
+
+
 
 
     }
@@ -34,9 +40,9 @@ public class ItemsControlador {
     @GetMapping("/listaProductos")
     public ResponseEntity<List<Item>> listaProductos(){
 
-        List<Item> result = service.ListAll();
+       // List<Item> result = service.ListAll();
        // return new ResponseEntity<List<Producto>>(result, HttpStatus.OK);
-        return ResponseEntity.ok(new ArrayList<>(result));
+        return ResponseEntity.ok(service.ListAll());
     }
 
     // Producto por ID
@@ -45,6 +51,21 @@ public class ItemsControlador {
         Item result = service.FinbyId(id);
         // implícitamente si no lo encuentra, lanza excepción
         return  ResponseEntity.ok(result);
+    }
+
+    @GetMapping("/items/new")
+    public String showNewForm(Model model){
+        model.addAttribute("item",new Item());
+        return "crearitem";
+
+
+    }
+
+    @PostMapping("/item/save")
+    public String saveItem(Item item){
+        service.saveItem(item);
+        return "redirect:/items";
+
     }
 
     @PostMapping(value = "/new", consumes = MediaType.APPLICATION_JSON_VALUE , produces = MediaType.APPLICATION_JSON_VALUE)
@@ -59,10 +80,10 @@ public class ItemsControlador {
 
     }
 
-    @PutMapping(value = "/edit", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Item editItem(@RequestBody Item item){
+    @PutMapping(value = "/edit/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public Item editItem(@PathVariable("id") Long id, @RequestBody ItemDto item){
 
-        return service.updateItems(item, item.getId());
+        return service.updateItems(item, id);
 
     }
 

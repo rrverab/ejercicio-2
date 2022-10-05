@@ -2,9 +2,12 @@ package com.gestion.items.servicio;
 
 
 import com.gestion.items.entidades.Item;
+import com.gestion.items.dto.ItemDto;
 import com.gestion.items.repositorio.ItemsRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+
 
 import java.util.List;
 
@@ -24,16 +27,21 @@ public class ItemsServicio {
 
     }
 
-    public Item updateItems(Item item, Long id){
+    public Item updateItems(ItemDto itemDto, Long id){
 
-        Item item1 =  itemsRepositorio.findById(id).get();
+        Item item =  itemsRepositorio.findById(id).get();
 
-       if (item1 != null){
-           return itemsRepositorio.save(item1);
-       }
+         item.setCapacidad(itemDto.getCapacidad());
+        item.setNombre(itemDto.getNombre());
+        item.setEnvase(itemDto.getEnvase());
+        item.setTipo(itemDto.getTipo());
+        item.setNevera(itemDto.getNevera());
 
 
-        return item1;
+        return itemsRepositorio.save(item);
+
+
+
 
     }
 

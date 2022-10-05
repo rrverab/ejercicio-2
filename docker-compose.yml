@@ -1,0 +1,25 @@
+version: "3.7"
+services:
+  # servidor BD
+  mysql_db:
+    image: "mysql:8.0"
+    restart: always
+    environment:
+      - MYSQL_DATABASE=control_items
+      - MYSQL_USER=bd_dev
+      - MYSQL_PASSWORD=0M0e0!W&f&Md
+      - MYSQL_ROOT_PASSWORD=5cGG54z3G&V0
+    ports:
+      - 3307:3306
+    volumes:
+      - db-data:/var/lib/mysql
+  # app springboot
+  app:
+    build: ./
+    restart: always
+    ports:
+      - 8090:8080
+    depends_on:
+      - mysql_db
+volumes:
+  db-data:

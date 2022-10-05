@@ -1,46 +1,21 @@
-package com.gestion.items.entidades;
+package com.gestion.items.dto;
 
-import javax.persistence.*;
-
-@Entity
-@Table(name = "items")
-public class Item {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+public class ItemDto {
 
 
-    @Column(nullable = false, length = 60)
+
     private String nombre;
-    @Column(nullable = false, length = 60)
     private String tipo;
-    @Column(nullable = false, length = 60)
     private String envase;
-    @Column(nullable = false)
     private Integer capacidad;
-    @Column(nullable = false)
     private Boolean nevera;
 
-
-    public Item(long id, String nombre, String tipo, String envase, Integer capacidad, Boolean nevera) {
-        this.id = id;
+    public ItemDto(String nombre, String tipo, String envase, Integer capacidad, Boolean nevera) {
         this.nombre = nombre;
         this.tipo = tipo;
         this.envase = envase;
         this.capacidad = capacidad;
         this.nevera = nevera;
-    }
-
-    public Item() {
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getNombre() {
@@ -82,8 +57,4 @@ public class Item {
     public void setNevera(Boolean nevera) {
         this.nevera = nevera;
     }
-
-
-
-
 }
