@@ -1,6 +1,5 @@
 package com.gestion.items.servicio;
 
-
 import com.gestion.items.dto.ItemDto;
 import com.gestion.items.entidades.Item;
 import com.gestion.items.excepciones.NotFoundException;
@@ -12,7 +11,8 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ItemsServicio {
+
+public class ItemsServicioAsync {
 
     @Autowired
     ItemsRepositorio itemsRepositorio;
@@ -63,6 +63,8 @@ public class ItemsServicio {
     public void deletedItems(Long id){
         itemsRepositorio.deleteById(id);
     }
+
+
 
 
 
