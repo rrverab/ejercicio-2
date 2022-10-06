@@ -53,20 +53,54 @@ public class ItemsControlador {
         return  ResponseEntity.ok(result);
     }
 
+
+
     @GetMapping("/items/new")
-    public String showNewForm(Model model){
+    public String showNewForm2(Model model){
         model.addAttribute("item",new Item());
-        return "crearitem";
+        return "crear_item";
 
 
     }
 
     @PostMapping("/item/save")
-    public String saveItem(Item item){
+    public String saveItem(@ModelAttribute ("item") Item item){
         service.saveItem(item);
         return "redirect:/items";
 
     }
+
+    @GetMapping("/item/editar/{id}")
+    public String editar(@PathVariable long id  ,Model model){
+        model.addAttribute("item",service.FinbyId(id));
+        return "editar_item";
+
+    }
+
+    @GetMapping("/item/eli/{id}")
+    public String eliminar(@PathVariable long id){
+        service.deletedItems(id);
+        return "redirect:/items";
+
+    }
+
+    @PostMapping("/item/{id}")
+    public String actualizaritem(@PathVariable long id  ,@ModelAttribute("item") Item item,Model model){
+        model.addAttribute("item",service.FinbyId(id));
+        Item item1 = service.FinbyId(id);
+        item1.setId(id);
+        item1.setNombre(item.getNombre());
+        item1.setTipo(item.getTipo());
+        item1.setEnvase(item.getEnvase());
+        item1.setCapacidad(item.getCapacidad());
+        item1.setNevera(item.getNevera());
+        service.saveItem(item1);
+
+        return "redirect:/items";
+
+    }
+
+
 
     @PostMapping(value = "/new", consumes = MediaType.APPLICATION_JSON_VALUE , produces = MediaType.APPLICATION_JSON_VALUE)
     public Item newProducto(@RequestBody Item item){
