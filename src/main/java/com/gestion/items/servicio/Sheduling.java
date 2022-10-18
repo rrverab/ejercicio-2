@@ -20,7 +20,7 @@ public class Sheduling {
 
     }
 
-    @Scheduled(fixedDelay = 5000)
+    @Scheduled(fixedDelay = 10000)
     public void procesarItem() {
         if (!repositorio.existsByEstado("Waiting")) {
 

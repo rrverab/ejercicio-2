@@ -60,8 +60,9 @@ public class ItemsServicio {
 
     public Item saveItem(Item item){
 
-        
-        item.setEstado("Created");
+        LocalDateTime dateTime = LocalDateTime.now();
+        item.setFecha2(dateTime);
+        item.setEstado("Waiting");
 
 
         return itemsRepositorio.save(item);
@@ -70,9 +71,6 @@ public class ItemsServicio {
 
     public Item saveItem2(Item item){
 
-        LocalDateTime dateTime = LocalDateTime.now();
-        item.setFecha2(dateTime);
-        item.setEstado("Waiting");
 
 
         return itemsRepositorio.save(item);

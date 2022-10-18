@@ -77,7 +77,7 @@ public class ItemsControlador {
 
     @PostMapping("/item/save")
     public String saveItem(@ModelAttribute ("item") Item item){
-        service.saveItem2(item);
+        service.saveItem(item);
         return "redirect:/items";
 
     }
