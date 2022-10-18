@@ -6,8 +6,8 @@ services:
     restart: always
     environment:
       - MYSQL_DATABASE=control_items
-      - MYSQL_USER=bd_dev
-      - MYSQL_PASSWORD=0M0e0!W&f&Md
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=administrador
       - MYSQL_ROOT_PASSWORD=5cGG54z3G&V0
     ports:
       - 3307:3306
