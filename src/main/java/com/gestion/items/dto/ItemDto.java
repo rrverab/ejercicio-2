@@ -9,10 +9,10 @@ public class ItemDto {
     private String envase;
     private Integer capacidad;
     private Boolean nevera;
-    private Integer estado;
+    private String estado;
 
 
-    public ItemDto(String nombre, String tipo, String envase, Integer capacidad, Boolean nevera, Integer estado) {
+    public ItemDto(String nombre, String tipo, String envase, Integer capacidad, Boolean nevera, String estado) {
         this.nombre = nombre;
         this.tipo = tipo;
         this.envase = envase;
@@ -61,11 +61,11 @@ public class ItemDto {
         this.nevera = nevera;
     }
 
-    public Integer getEstado() {
+    public String getEstado() {
         return estado;
     }
 
-    public void setEstado(Integer estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
     }
 }

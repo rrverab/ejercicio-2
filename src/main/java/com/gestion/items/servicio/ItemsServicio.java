@@ -7,6 +7,7 @@ import com.gestion.items.excepciones.NotFoundException;
 import com.gestion.items.repositorio.ItemsRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -31,7 +32,7 @@ public class ItemsServicio {
         return item.get();
 
     }
-
+    @Transactional
     public Item updateItems(ItemDto itemDto, Long id){
 
         Optional<Item> item1 = itemsRepositorio.findById(id);
@@ -39,8 +40,9 @@ public class ItemsServicio {
             throw new NotFoundException("Item con id " + id + " no encontrado");
         }
 
-        itemDto.setEstado(2);
+        itemDto.setEstado("Created");
         Item item = item1.get();
+        item.setId(id);
         item.setCapacidad(itemDto.getCapacidad());
         item.setNombre(itemDto.getNombre());
         item.setEnvase(itemDto.getEnvase());
@@ -48,8 +50,9 @@ public class ItemsServicio {
         item.setNevera(itemDto.getNevera());
         item.setEstado(itemDto.getEstado());
 
-        return itemsRepositorio.save(item);
-
+        Item resultado = itemsRepositorio.save(item);
+        itemsRepositorio.flush();
+        return resultado;
 
 
 
@@ -57,13 +60,26 @@ public class ItemsServicio {
 
     public Item saveItem(Item item){
 
-        LocalDateTime dateTime = LocalDateTime.now();
-        item.setEstado(1);
-        item.setFecha2(dateTime);
+        
+        item.setEstado("Created");
+
 
         return itemsRepositorio.save(item);
 
     }
+
+    public Item saveItem2(Item item){
+
+        LocalDateTime dateTime = LocalDateTime.now();
+        item.setFecha2(dateTime);
+        item.setEstado("Waiting");
+
+
+        return itemsRepositorio.save(item);
+
+    }
+
+
 
     public void deletedItems(Long id){
         itemsRepositorio.deleteById(id);

@@ -23,12 +23,12 @@ public class Item {
     @Column(nullable = false)
     private Boolean nevera;
     @Column(nullable = false)
-    private Integer estado;
+    private String estado;
     @Column(nullable = false)
     private LocalDateTime fecha2;
 
 
-    public Item(long id, String nombre, String tipo, String envase, Integer capacidad, Boolean nevera, Integer estado, LocalDateTime fecha2) {
+    public Item(long id, String nombre, String tipo, String envase, Integer capacidad, Boolean nevera, String estado, LocalDateTime fecha2) {
         this.id = id;
         this.nombre = nombre;
         this.tipo = tipo;
@@ -90,11 +90,11 @@ public class Item {
         this.nevera = nevera;
     }
 
-    public Integer getEstado() {
+    public String getEstado() {
         return estado;
     }
 
-    public void setEstado(Integer estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
     }
 
@@ -104,5 +104,19 @@ public class Item {
 
     public void setFecha2(LocalDateTime fecha2) {
         this.fecha2 = fecha2;
+    }
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", tipo='" + tipo + '\'' +
+                ", envase='" + envase + '\'' +
+                ", capacidad=" + capacidad +
+                ", nevera=" + nevera +
+                ", estado=" + estado +
+                ", fecha2=" + fecha2 +
+                '}';
     }
 }

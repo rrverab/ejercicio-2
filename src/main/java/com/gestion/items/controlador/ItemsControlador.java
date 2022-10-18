@@ -37,6 +37,18 @@ public class ItemsControlador {
 
     }
 
+    @GetMapping( "/cliente")
+    public String ShowListItems2(Model model){
+
+        List<Item> listItems = service.ListAll();
+        model.addAttribute("listItems",listItems);
+        return "cliente";
+
+
+
+
+    }
+
     @GetMapping("/listaProductos")
     public ResponseEntity<List<Item>> listaProductos(){
 
@@ -65,7 +77,7 @@ public class ItemsControlador {
 
     @PostMapping("/item/save")
     public String saveItem(@ModelAttribute ("item") Item item){
-        service.saveItem(item);
+        service.saveItem2(item);
         return "redirect:/items";
 
     }
@@ -94,7 +106,7 @@ public class ItemsControlador {
         item1.setEnvase(item.getEnvase());
         item1.setCapacidad(item.getCapacidad());
         item1.setNevera(item.getNevera());
-        service.saveItem(item1);
+        service.saveItem2(item1);
 
         return "redirect:/items";
 

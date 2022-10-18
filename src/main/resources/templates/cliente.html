@@ -30,7 +30,8 @@
             <th scope="col">Envase</th>
             <th scope="col">Capacidad</th>
             <th scope="col">Nevera</th>
-            <th scope="col">Acciones</th>
+            <th scope="col">Fecha Registro</th>
+            <th scope="col">Estado</th>
         </tr>
         </thead>
         <tbody>
@@ -41,14 +42,8 @@
             <td th:text=${item.envase}>Envase </td>
             <td th:text=${item.capacidad}>Capacidad </td>
             <td th:text=${item.nevera}>Nevera </td>
-            <td>
-
-
-                <a  th:href="@{/item/editar/{id}(id=${item.id})}" class="btn btn-info">Editar </a>
-                <a  th:href="@{/item/eli/{id}(id=${item.id})}" class="btn btn-danger">Eliminar </a>
-
-
-            </td>
+            <td th:text=${item.fecha2}>Fecha Registro </td>
+            <td th:text=${item.estado}>Estado</td>
 
         </tr>
         </tbody>
